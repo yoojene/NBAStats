@@ -29,6 +29,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {Teams} from './Teams/Teams';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -60,64 +61,6 @@ function Section({children, title}: SectionProps): JSX.Element {
   );
 }
 
-function Teams({navigation}): JSX.Element {
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingTop: 22,
-    },
-    item: {
-      padding: 10,
-      fontSize: 18,
-      height: 44,
-    },
-  });
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  const listData = [
-    {name: 'GSW'},
-    {name: 'DET'},
-    {name: 'LAL'},
-    {name: 'LAC'},
-    {name: 'POR'},
-    {name: 'CHI'},
-    {name: 'MIA'},
-    {name: 'MIL'},
-  ];
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      {/* <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}> */}
-      <View
-        style={{
-          backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        }}>
-        <FlatList
-          data={listData}
-          renderItem={({item}) => (
-            <>
-              <Text
-                style={styles.item}
-                onPress={() => navigation.navigate('Team', {item: item.name})}>
-                {item.name}
-              </Text>
-            </>
-          )}
-        />
-      </View>
-      {/* </ScrollView> */}
-    </SafeAreaView>
-  );
-}
 function Team({navigation, route}): JSX.Element {
   const styles = StyleSheet.create({
     container: {
@@ -177,19 +120,6 @@ function Team({navigation, route}): JSX.Element {
   );
 }
 
-function New(): JSX.Element {
-  return (
-    <Text
-      style={[
-        styles.sectionTitle,
-        {
-          color: Colors.black,
-        },
-      ]}>
-      {'This is the new title'}
-    </Text>
-  );
-}
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
