@@ -47,8 +47,12 @@ export const Teams: React.FC<any> = ({navigation}) => {
       const list = body.data.map(item => {
         return {
           id: item.id,
-          name: item.full_name,
+          full_name: item.full_name,
+          name: item.name,
           abbr: item.abbreviation,
+          city: item.city,
+          conference: item.conference,
+          division: item.division,
         };
       });
 
@@ -77,8 +81,8 @@ export const Teams: React.FC<any> = ({navigation}) => {
             <>
               <Text
                 style={styles.item}
-                onPress={() => navigation.navigate('Team', {item: item.name})}>
-                {item.name}
+                onPress={() => navigation.navigate('Team', {item: item})}>
+                {item.full_name}
               </Text>
             </>
           )}

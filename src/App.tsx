@@ -30,7 +30,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import {Teams} from './Teams/Teams';
-
+import Reactotron from 'reactotron-react-native';
+import {Team} from './Team/Team';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -61,65 +62,6 @@ function Section({children, title}: SectionProps): JSX.Element {
   );
 }
 
-function Team({navigation, route}): JSX.Element {
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingTop: 22,
-    },
-    item: {
-      padding: 10,
-      fontSize: 18,
-      height: 44,
-    },
-  });
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  // const listData = [
-  //   {name: 'Eugene'},
-  //   {name: 'Spencer'},
-  //   {name: 'May'},
-  //   {name: 'Keith'},
-  //   {name: 'Beth'},
-  //   {name: 'Tim'},
-  //   {name: 'Jean'},
-  //   {name: 'Wilson'},
-  // ];
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      {/* <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}> */}
-      <View
-        style={{
-          backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        }}>
-        {/* <FlatList
-          data={listData}
-          renderItem={({item}) => (
-            <>
-              <Text
-                style={styles.item}
-                onPress={navigation.navigate('Details')}>
-                {item.name}
-              </Text>
-            </>
-          )}
-        /> */}
-      </View>
-      {/* </ScrollView> */}
-    </SafeAreaView>
-  );
-}
-
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
@@ -129,7 +71,7 @@ function App(): JSX.Element {
         <Stack.Screen name="Teams" component={Teams} />
         <Stack.Screen
           name="Team"
-          options={({route}) => ({title: route?.params?.item})}>
+          options={({route}) => ({title: route?.params?.item.full_name})}>
           {props => <Team {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
